@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOSSIER EPSTEIN — Investigation Journalistique</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a; --ink2: #111; --paper: #f5f0e8; --paper2: #ede8dc;
+  --paper3: #e5dfd0; --red: #c0392b; --red2: #e74c3c; --gold: #b8860b;
+  --gold2: #d4a017; --text: #1a1a1a; --text2: #3a3a3a; --text3: #5a5a5a;
+  --border: rgba(10,10,10,.12); --border-dark: rgba(10,10,10,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Mono',monospace;background:var(--paper);color:var(--text);min-height:100vh;padding-bottom:68px;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.5;}
+
+/* HEADER */
+.site-header{background:var(–ink);color:var(–paper);border-bottom:4px solid var(–red);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:8px 28px;border-bottom:1px solid rgba(255,255,255,.08);}
+.classified-stamp{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:11px;letter-spacing:.3em;color:var(–red2);border:2px solid var(–red2);padding:3px 10px;transform:rotate(-2deg);display:inline-block;}
+.live-badge{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.15em;color:#4ade80;font-family:‘Barlow Condensed’,sans-serif;font-weight:600;}
+.live-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:livePulse 1.5s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+.header-main{padding:16px 28px 14px;display:flex;align-items:flex-end;gap:20px;}
+.site-title{font-family:‘Playfair Display’,serif;font-size:48px;font-weight:900;line-height:1;letter-spacing:-.02em;}
+.site-title span{color:var(–red2);}
+.title-meta{padding-bottom:4px;}
+.title-sub{font-family:‘Barlow Condensed’,sans-serif;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:3px;}
+.title-date{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.1em;}
+.header-nav{display:flex;border-top:1px solid rgba(255,255,255,.06);overflow-x:auto;}
+.nav-item{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:12px;letter-spacing:.15em;text-transform:uppercase;padding:10px 20px;color:rgba(245,240,232,.55);cursor:pointer;border-right:1px solid rgba(255,255,255,.05);transition:all .2s;white-space:nowrap;}
+.nav-item:hover,.nav-item.active{color:var(–paper);background:rgba(255,255,255,.05);}
+.nav-item.active{border-bottom:2px solid var(–red2);}
+
+/* BREAKING */
+.breaking-bar{background:var(–red);color:white;display:flex;align-items:center;height:34px;overflow:hidden;border-bottom:2px solid var(–ink);}
+.breaking-label{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:11px;letter-spacing:.2em;padding:0 14px;background:var(–ink);height:100%;display:flex;align-items:center;white-space:nowrap;flex-shrink:0;}
+.breaking-ticker{flex:1;overflow:hidden;}
+.ticker-inner{display:flex;animation:ticker 70s linear infinite;white-space:nowrap;}
+.ticker-item{font-family:‘Barlow Condensed’,sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;padding:0 36px;}
+.ticker-item::before{content:’◆ ’;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* RSS BAR */
+.rss-status-bar{background:var(–paper2);border-bottom:1px solid var(–border);padding:5px 28px;display:flex;align-items:center;gap:14px;font-size:10px;color:var(–text3);overflow-x:auto;}
+.rss-source{display:flex;align-items:center;gap:5px;white-space:nowrap;font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:11px;}
+.rss-dot{width:5px;height:5px;border-radius:50%;}
+.rss-ok{background:#4ade80;} .rss-loading{background:#fbbf24;animation:livePulse 1s infinite;} .rss-err{background:#ef4444;}
+
+/* LAYOUT */
+.main-container{max-width:1400px;margin:0 auto;padding:0 24px;}
+.page-section{padding:28px 0;}
+.page-section+.page-section{border-top:2px solid var(–border-dark);}
+
+/* HERO */
+.hero-section{padding:28px 0 20px;border-bottom:2px solid var(–border-dark);margin-bottom:28px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr 300px;gap:0;border:1px solid var(–border-dark);}
+.hero-main{grid-column:1/3;padding:26px;border-right:1px solid var(–border-dark);background:white;}
+.hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.hero-title{font-family:‘Playfair Display’,serif;font-size:30px;font-weight:900;line-height:1.15;margin-bottom:12px;color:var(–ink);}
+.hero-excerpt{font-size:12px;line-height:1.75;color:var(–text2);margin-bottom:18px;}
+.article-footer{display:flex;align-items:center;justify-content:space-between;}
+.article-source{font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:10px;letter-spacing:.12em;color:var(–text3);text-transform:uppercase;}
+.read-btn{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;background:var(–ink);color:var(–paper);text-decoration:none;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px;}
+.read-btn:hover{background:var(–red);}
+
+/* DOSSIER TAGS */
+.dossier-tag{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:3px 7px;border:1.5px solid currentColor;}
+.tag-red{color:var(–red);} .tag-gold{color:var(–gold);} .tag-ink{color:var(–text);}
+.tag-blue{color:#1a4f7a;} .tag-purple{color:#6b21a8;} .tag-green{color:#166534;} .tag-orange{color:#c2410c;}
+.article-date{font-size:10px;color:var(–text3);letter-spacing:.1em;}
+
+/* SIDEBAR FEED */
+.hero-sidebar{background:var(–paper2);border-left:1px solid var(–border-dark);display:flex;flex-direction:column;}
+.sidebar-header-block{padding:12px 14px;border-bottom:2px solid var(–ink);background:var(–ink);color:var(–paper);font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.sidebar-feed{flex:1;overflow-y:auto;max-height:380px;}
+.feed-item{padding:12px 14px;border-bottom:1px solid var(–border);cursor:pointer;transition:background .15s;}
+.feed-item:hover{background:var(–paper3);}
+.feed-item-tag{font-size:8px;letter-spacing:.15em;text-transform:uppercase;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;margin-bottom:3px;}
+.feed-item-title{font-family:‘Playfair Display’,serif;font-size:12px;font-weight:700;line-height:1.4;color:var(–ink);margin-bottom:3px;}
+.feed-item-meta{font-size:8px;color:var(–text3);letter-spacing:.05em;}
+.feed-new{background:rgba(192,57,43,.04);border-left:2px solid var(–red);}
+
+/* DOSSIER CARDS */
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(–ink);}
+.section-title{font-family:‘Playfair Display’,serif;font-size:22px;font-weight:900;color:var(–ink);}
+.section-count{font-size:10px;color:var(–text3);letter-spacing:.1em;font-family:‘Barlow Condensed’,sans-serif;}
+.dossiers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:36px;}
+.dossier-card{background:white;border:1px solid var(–border-dark);cursor:pointer;transition:all .2s;}
+.dossier-card:hover{border-color:var(–ink);transform:translateY(-2px);box-shadow:4px 4px 0 var(–ink);}
+.dossier-card.active{border-color:var(–red);box-shadow:4px 4px 0 var(–red);}
+.dossier-card-header{padding:14px;}
+.dossier-icon{font-size:22px;margin-bottom:7px;display:block;}
+.dossier-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(–ink);margin-bottom:3px;}
+.dossier-desc{font-size:9px;color:var(–text3);line-height:1.5;}
+.dossier-card-footer{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;background:var(–paper2);}
+.dossier-count{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:10px;color:var(–text3);}
+.dossier-new-badge{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:8px;letter-spacing:.12em;color:var(–red);background:rgba(192,57,43,.1);padding:2px 5px;}
+
+/* ARTICLES GRID */
+.articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.article-card{background:white;border:1px solid var(–border-dark);transition:all .2s;display:flex;flex-direction:column;animation:fadeInCard .4s ease;}
+@keyframes fadeInCard{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.article-card:hover{border-color:var(–ink);box-shadow:4px 4px 0 rgba(0,0,0,.1);transform:translateY(-1px);}
+.article-card.new-article{border-left:3px solid var(–red);}
+.article-card-header{padding:15px 15px 11px;flex:1;}
+.article-card-meta{display:flex;align-items:center;gap:7px;margin-bottom:9px;flex-wrap:wrap;}
+.new-indicator{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:8px;letter-spacing:.2em;color:white;background:var(–red);padding:2px 5px;animation:newBlink 2s infinite;}
+@keyframes newBlink{0%,100%{opacity:1;}50%{opacity:.6;}}
+.article-card-title{font-family:‘Playfair Display’,serif;font-size:15px;font-weight:700;line-height:1.4;color:var(–ink);margin-bottom:7px;}
+.article-card-excerpt{font-size:10px;color:var(–text2);line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.article-card-footer{padding:9px 15px;display:flex;align-items:center;justify-content:space-between;background:var(–paper2);border-top:1px solid var(–border);flex-shrink:0;}
+.article-source-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:600;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(–text3);}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+.filter-btn{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;background:transparent;border:1.5px solid var(–border-dark);color:var(–text2);cursor:pointer;transition:all .15s;}
+.filter-btn:hover,.filter-btn.active{background:var(–ink);color:var(–paper);border-color:var(–ink);}
+.search-input-wrapper{position:relative;margin-left:auto;}
+.search-input{padding:6px 12px 6px 28px;background:white;border:1.5px solid var(–border-dark);font-family:‘IBM Plex Mono’,monospace;font-size:10px;color:var(–text);outline:none;width:200px;transition:border-color .2s;}
+.search-input:focus{border-color:var(–ink);}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:11px;color:var(–text3);}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:’’;position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(–border-dark);}
+.timeline-item{position:relative;padding-bottom:24px;animation:fadeInCard .4s ease;}
+.timeline-item::before{content:’’;position:absolute;left:-25px;top:5px;width:10px;height:10px;border-radius:50%;background:var(–ink);border:2px solid var(–paper);box-shadow:0 0 0 2px var(–ink);}
+.timeline-item.milestone::before{background:var(–red);box-shadow:0 0 0 2px var(–red);}
+.timeline-date{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(–text3);margin-bottom:3px;}
+.timeline-title{font-family:‘Playfair Display’,serif;font-size:14px;font-weight:700;color:var(–ink);margin-bottom:3px;}
+.timeline-desc{font-size:10px;color:var(–text2);line-height:1.65;}
+.timeline-source{font-size:8px;color:var(–text3);margin-top:3px;letter-spacing:.08em;}
+
+/* PERSONS */
+.persons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:11px;margin-bottom:36px;}
+.person-card{background:white;border:1px solid var(–border-dark);padding:14px;text-align:center;cursor:pointer;transition:all .2s;}
+.person-card:hover{border-color:var(–ink);box-shadow:3px 3px 0 var(–ink);}
+.person-avatar{width:56px;height:56px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(–paper2);border:2px solid var(–border-dark);}
+.person-name{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(–ink);margin-bottom:3px;}
+.person-role{font-size:9px;color:var(–text3);line-height:1.4;}
+.person-status{display:inline-block;margin-top:7px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:2px 7px;border:1.5px solid currentColor;}
+.status-convicted{color:var(–red);} .status-accused{color:var(–gold);} .status-deceased{color:var(–text3);}
+.status-investigated{color:#1e40af;} .status-witness{color:#166534;} .status-fled{color:#6b21a8;}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(–ink);margin-bottom:28px;border:1px solid var(–ink);}
+.stat-block{background:var(–paper2);padding:16px;text-align:center;}
+.stat-num{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:28px;color:var(–ink);letter-spacing:-.02em;}
+.stat-num.red{color:var(–red);}
+.stat-label{font-size:9px;color:var(–text3);letter-spacing:.15em;text-transform:uppercase;margin-top:2px;font-family:‘Barlow Condensed’,sans-serif;font-weight:600;}
+
+/* UPDATE PANEL */
+.update-panel{position:fixed;bottom:20px;right:20px;width:320px;background:var(–ink);color:var(–paper);border:2px solid var(–red);z-index:200;animation:slideInPanel .4s ease;box-shadow:0 8px 40px rgba(0,0,0,.4);display:none;}
+@keyframes slideInPanel{from{transform:translateX(340px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.update-panel-header{padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;background:var(–red);}
+.update-panel-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:11px;letter-spacing:.2em;text-transform:uppercase;}
+.update-close{background:none;border:none;color:white;font-size:15px;cursor:pointer;}
+.update-items{max-height:280px;overflow-y:auto;}
+.update-item{padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.06);}
+.update-item-tag{font-size:8px;color:rgba(245,240,232,.5);letter-spacing:.12em;text-transform:uppercase;font-family:‘Barlow Condensed’,sans-serif;font-weight:600;margin-bottom:3px;}
+.update-item-title{font-family:‘Playfair Display’,serif;font-size:12px;line-height:1.4;margin-bottom:3px;}
+.update-item-meta{font-size:8px;color:rgba(245,240,232,.4);}
+.update-panel-footer{padding:9px 13px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;}
+.update-status{font-size:8px;color:rgba(245,240,232,.4);letter-spacing:.08em;}
+.update-view-all{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(–red2);cursor:pointer;background:none;border:none;}
+
+/* TOAST */
+.toast-container{position:fixed;top:80px;right:20px;z-index:300;display:flex;flex-direction:column;gap:7px;}
+.toast{background:var(–ink);color:var(–paper);border-left:3px solid var(–red);padding:11px 14px;max-width:290px;animation:toastIn .3s ease;box-shadow:0 4px 20px rgba(0,0,0,.3);cursor:pointer;}
+@keyframes toastIn{from{transform:translateX(310px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.toast-title{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(–red2);margin-bottom:3px;}
+.toast-body{font-family:‘Playfair Display’,serif;font-size:11px;line-height:1.4;}
+.toast-source{font-size:8px;color:rgba(245,240,232,.4);margin-top:3px;}
+
+/* UPDATE BTN */
+.update-btn-float{position:fixed;bottom:20px;right:20px;background:var(–red);color:white;border:none;font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:9px 16px;cursor:pointer;display:none;align-items:center;gap:7px;box-shadow:0 4px 20px rgba(192,57,43,.4);transition:all .2s;z-index:150;}
+.update-btn-float:hover{background:#a93226;transform:translateY(-2px);}
+.update-count-badge{background:white;color:var(–red);border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-size:9px;}
+
+/* SKELETON */
+.loading-skeleton{background:linear-gradient(90deg,var(–paper2) 25%,var(–paper3) 50%,var(–paper2) 75%);background-size:200% 100%;animation:skeleton 1.5s infinite;border-radius:2px;}
+@keyframes skeleton{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.skeleton-card{background:white;border:1px solid var(–border-dark);padding:14px;}
+.skeleton-line{height:11px;margin-bottom:7px;}
+.skeleton-title{height:17px;margin-bottom:11px;width:85%;}
+
+/* FOOTER */
+.site-footer{background:var(–ink);color:rgba(245,240,232,.4);padding:22px 28px;margin-top:40px;font-size:10px;line-height:1.8;border-top:4px solid var(–red);}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+.footer-stat{font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:20px;color:rgba(245,240,232,.7);}
+
+/* MISC */
+.empty-state{padding:36px;text-align:center;color:var(–text3);font-size:11px;background:var(–paper2);border:1px dashed var(–border-dark);}
+::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px;}
+
+@media(max-width:900px){
+.hero-grid{grid-template-columns:1fr;} .hero-main{grid-column:1;border-right:none;} .hero-sidebar{border-left:none;border-top:1px solid var(–border-dark);}
+.site-title{font-size:32px;} .header-main{padding:12px 16px;} .header-top,.rss-status-bar{padding:7px 16px;} .main-container{padding:0 14px;}
+.stats-bar{grid-template-columns:repeat(2,1fr);}
+.fc-sticky-bar{padding:10px 14px;flex-direction:column;gap:8px;text-align:center;}
+.fc-inline-banner{flex-direction:column;text-align:center;}
+.fc-popup{width:90vw;right:5vw;bottom:14px;}
+}
+
+/* ===================== FREECASH ADS ===================== */
+
+/* — STICKY BOTTOM BAR — */
+.fc-sticky-bar {
+position: fixed;
+bottom: 0; left: 0; right: 0;
+z-index: 500;
+background: linear-gradient(90deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
+border-top: 2px solid #f0c040;
+padding: 10px 28px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 16px;
+box-shadow: 0 -4px 30px rgba(240,192,64,.2);
+animation: slideUpBar .6s ease .8s both;
+}
+@keyframes slideUpBar{from{transform:translateY(100%);}to{transform:translateY(0);}}
+
+.fc-sticky-left {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.fc-coin-icon {
+font-size: 28px;
+animation: coinSpin 3s ease-in-out infinite;
+}
+@keyframes coinSpin{0%,100%{transform:rotateY(0);}50%{transform:rotateY(180deg);}}
+
+.fc-sticky-text {}
+.fc-sticky-title {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 15px;
+letter-spacing: .08em;
+color: #f0c040;
+line-height: 1.1;
+}
+.fc-sticky-sub {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 10px;
+color: rgba(255,255,255,.65);
+letter-spacing: .04em;
+}
+.fc-sticky-badge {
+background: #f0c040;
+color: #1a1a2e;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 10px;
+letter-spacing: .15em;
+padding: 3px 8px;
+border-radius: 3px;
+text-transform: uppercase;
+animation: badgePulse 2s infinite;
+}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(240,192,64,.5);}50%{box-shadow:0 0 0 6px rgba(240,192,64,0);}}
+
+.fc-sticky-btn {
+background: linear-gradient(135deg, #f0c040, #e89a10);
+color: #1a1a2e;
+border: none;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 14px;
+letter-spacing: .12em;
+text-transform: uppercase;
+padding: 10px 24px;
+cursor: pointer;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+gap: 7px;
+transition: all .2s;
+box-shadow: 0 4px 16px rgba(240,192,64,.35);
+white-space: nowrap;
+flex-shrink: 0;
+}
+.fc-sticky-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,192,64,.5);}
+
+.fc-sticky-close {
+background: none;
+border: none;
+color: rgba(255,255,255,.4);
+font-size: 18px;
+cursor: pointer;
+flex-shrink: 0;
+padding: 2px 6px;
+transition: color .2s;
+}
+.fc-sticky-close:hover{color:white;}
+
+/* — INLINE BANNER (between articles) — */
+.fc-inline-banner {
+grid-column: 1 / -1;
+background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+border: 1px solid rgba(240,192,64,.3);
+border-left: 4px solid #f0c040;
+padding: 20px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+position: relative;
+overflow: hidden;
+animation: fadeInCard .4s ease;
+}
+.fc-inline-banner::before {
+content: ‘’;
+position: absolute;
+top: -40px; right: -40px;
+width: 180px; height: 180px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(240,192,64,.12) 0%, transparent 70%);
+pointer-events: none;
+}
+.fc-inline-banner::after {
+content: ‘💰’;
+position: absolute;
+right: 120px; top: 50%;
+transform: translateY(-50%);
+font-size: 60px;
+opacity: .07;
+pointer-events: none;
+}
+.fc-inline-info {}
+.fc-inline-tag {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 9px;
+letter-spacing: .25em;
+text-transform: uppercase;
+color: #f0c040;
+margin-bottom: 5px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.fc-inline-tag::before {
+content: ‘★’;
+font-size: 10px;
+}
+.fc-inline-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 20px;
+font-weight: 700;
+color: white;
+line-height: 1.2;
+margin-bottom: 5px;
+}
+.fc-inline-title span { color: #f0c040; }
+.fc-inline-desc {
+font-size: 10px;
+color: rgba(255,255,255,.55);
+letter-spacing: .04em;
+line-height: 1.6;
+}
+.fc-inline-right {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 8px;
+flex-shrink: 0;
+}
+.fc-inline-amount {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 32px;
+color: #f0c040;
+letter-spacing: -.02em;
+line-height: 1;
+}
+.fc-inline-amount-sub {
+font-size: 9px;
+color: rgba(255,255,255,.4);
+letter-spacing: .1em;
+text-transform: uppercase;
+margin-top: -4px;
+text-align: right;
+}
+.fc-inline-btn {
+background: linear-gradient(135deg, #f0c040, #e89a10);
+color: #1a1a2e;
+border: none;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 13px;
+letter-spacing: .12em;
+text-transform: uppercase;
+padding: 10px 20px;
+cursor: pointer;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+transition: all .2s;
+box-shadow: 0 4px 16px rgba(240,192,64,.35);
+}
+.fc-inline-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,192,64,.5);}
+.fc-inline-note {
+font-size: 8px;
+color: rgba(255,255,255,.25);
+letter-spacing: .05em;
+text-align: right;
+}
+
+/* — SIDEBAR PROMO CARD — */
+.fc-sidebar-card {
+background: linear-gradient(160deg, #1a1a2e, #302b63);
+border: 1px solid rgba(240,192,64,.25);
+padding: 16px;
+margin-bottom: 0;
+}
+.fc-sidebar-header {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 10px;
+padding-bottom: 10px;
+border-bottom: 1px solid rgba(240,192,64,.15);
+}
+.fc-sidebar-icon { font-size: 20px; }
+.fc-sidebar-label {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 11px;
+letter-spacing: .15em;
+color: #f0c040;
+text-transform: uppercase;
+}
+.fc-sidebar-features {
+list-style: none;
+margin-bottom: 12px;
+}
+.fc-sidebar-features li {
+font-size: 9px;
+color: rgba(255,255,255,.6);
+padding: 3px 0;
+display: flex;
+align-items: center;
+gap: 6px;
+letter-spacing: .04em;
+}
+.fc-sidebar-features li::before { content: ‘✓’; color: #f0c040; font-weight: 700; flex-shrink: 0; }
+.fc-sidebar-btn {
+width: 100%;
+background: linear-gradient(135deg, #f0c040, #e89a10);
+color: #1a1a2e;
+border: none;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 12px;
+letter-spacing: .1em;
+text-transform: uppercase;
+padding: 10px;
+cursor: pointer;
+text-decoration: none;
+display: block;
+text-align: center;
+transition: all .2s;
+}
+.fc-sidebar-btn:hover{opacity:.9;transform:translateY(-1px);}
+
+/* — POPUP AD — */
+.fc-popup {
+position: fixed;
+bottom: 80px; right: 20px;
+width: 300px;
+background: linear-gradient(160deg, #1a1a2e 0%, #302b63 100%);
+border: 1px solid rgba(240,192,64,.4);
+border-top: 3px solid #f0c040;
+z-index: 400;
+box-shadow: 0 20px 60px rgba(0,0,0,.5);
+animation: popupIn .5s cubic-bezier(.175,.885,.32,1.275) 3s both;
+display: none;
+}
+@keyframes popupIn{from{transform:scale(.7) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+.fc-popup-header {
+padding: 12px 14px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid rgba(240,192,64,.1);
+}
+.fc-popup-label {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 10px;
+letter-spacing: .2em;
+color: #f0c040;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+.fc-popup-close {
+background: none;
+border: none;
+color: rgba(255,255,255,.4);
+font-size: 14px;
+cursor: pointer;
+}
+.fc-popup-body { padding: 14px; }
+.fc-popup-amount {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 42px;
+color: #f0c040;
+line-height: 1;
+margin-bottom: 2px;
+}
+.fc-popup-amount-sub {
+font-size: 9px;
+color: rgba(255,255,255,.45);
+letter-spacing: .1em;
+text-transform: uppercase;
+margin-bottom: 12px;
+}
+.fc-popup-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 15px;
+font-weight: 700;
+color: white;
+line-height: 1.4;
+margin-bottom: 8px;
+}
+.fc-popup-desc {
+font-size: 9px;
+color: rgba(255,255,255,.5);
+line-height: 1.6;
+margin-bottom: 14px;
+letter-spacing: .03em;
+}
+.fc-popup-btn {
+display: block;
+width: 100%;
+background: linear-gradient(135deg, #f0c040, #e89a10);
+color: #1a1a2e;
+border: none;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 13px;
+letter-spacing: .12em;
+text-transform: uppercase;
+padding: 12px;
+cursor: pointer;
+text-decoration: none;
+text-align: center;
+transition: all .2s;
+box-shadow: 0 4px 20px rgba(240,192,64,.4);
+}
+.fc-popup-btn:hover{opacity:.9;}
+.fc-popup-note {
+font-size: 8px;
+color: rgba(255,255,255,.2);
+text-align: center;
+margin-top: 8px;
+letter-spacing: .04em;
+}
+.fc-users-online {
+display: flex;
+align-items: center;
+gap: 5px;
+font-size: 8px;
+color: rgba(255,255,255,.4);
+margin-top: 8px;
+justify-content: center;
+}
+.fc-users-dot { width: 5px; height: 5px; background: #4ade80; border-radius: 50%; animation: livePulse 1.5s infinite; }
+</style>
+
+</head>
+<body>
+
+<!-- ===== FREECASH STICKY BAR ===== -->
+
+<div class="fc-sticky-bar" id="fcStickyBar">
+  <div class="fc-sticky-left">
+    <div class="fc-coin-icon">🪙</div>
+    <div class="fc-sticky-text">
+      <div class="fc-sticky-title">Gagne de l'argent réel en ligne — Gratuitement</div>
+      <div class="fc-sticky-sub">Sondages · Jeux · Offres · Retrait instantané en crypto ou PayPal</div>
+    </div>
+    <div class="fc-sticky-badge">Bonus $250</div>
+  </div>
+  <a href="https://freecash.com/r/9MYR8" target="_blank" class="fc-sticky-btn">
+    💰 COMMENCER GRATUITEMENT →
+  </a>
+  <button class="fc-sticky-close" onclick="closeStickyBar()">✕</button>
+</div>
+
+<!-- ===== FREECASH POPUP ===== -->
+
+<div class="fc-popup" id="fcPopup">
+  <div class="fc-popup-header">
+    <span class="fc-popup-label">⭐ PARTENAIRE RECOMMANDÉ</span>
+    <button class="fc-popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="fc-popup-body">
+    <div class="fc-popup-amount">$250</div>
+    <div class="fc-popup-amount-sub">Bonus de bienvenue disponible</div>
+    <div class="fc-popup-title">Transforme ton temps libre en argent réel</div>
+    <div class="fc-popup-desc">FreeCash paie chaque jour des milliers d'utilisateurs via PayPal, Bitcoin et cartes cadeau. Inscription 100% gratuite — aucune carte requise.</div>
+    <a href="https://freecash.com/r/9MYR8" target="_blank" class="fc-popup-btn">🚀 REJOINDRE FREECASH</a>
+    <div class="fc-users-online"><div class="fc-users-dot"></div>12 847 utilisateurs actifs maintenant</div>
+    <div class="fc-popup-note">Lien partenaire · Offre sous conditions</div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<button class="update-btn-float" id="updateFloatBtn" onclick="toggleUpdatePanel()">
+  <span class="live-dot"></span>
+  NOUVELLES MÀJ
+  <span class="update-count-badge" id="updateBadge">0</span>
+</button>
+<div class="update-panel" id="updatePanel">
+  <div class="update-panel-header">
+    <span class="update-panel-title">⚡ Mises à jour en direct</span>
+    <button class="update-close" onclick="toggleUpdatePanel()">✕</button>
+  </div>
+  <div class="update-items" id="updateItems"></div>
+  <div class="update-panel-footer">
+    <span class="update-status" id="updateStatusText">Actualisation toutes les 5 min</span>
+    <button class="update-view-all" onclick="showAllNew()">VOIR TOUT →</button>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="classified-stamp">DOSSIER DÉCLASSIFIÉ</div>
+    <div class="live-badge"><div class="live-dot"></div>VEILLE PRESSE ACTIVE — AUTO-UPDATE</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;color:rgba(245,240,232,.35)" id="currentDateTime"></div>
+  </div>
+  <div class="header-main">
+    <div class="site-title">AFFAIRE <span>EPSTEIN</span></div>
+    <div class="title-meta">
+      <div class="title-sub">Dossier d'investigation journalistique — Sources vérifiées</div>
+      <div class="title-date">AP · Reuters · BBC · NYT · Guardian · CNN · PBS · Al Jazeera · CBS · NBC · TIME</div>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <div class="nav-item active" onclick="switchTab('accueil',this)">ACCUEIL</div>
+    <div class="nav-item" onclick="switchTab('dossiers',this)">DOSSIERS</div>
+    <div class="nav-item" onclick="switchTab('articles',this)">ARTICLES <span id="navArticleCount" style="opacity:.5;font-size:9px;margin-left:4px;"></span></div>
+    <div class="nav-item" onclick="switchTab('chronologie',this)">CHRONOLOGIE</div>
+    <div class="nav-item" onclick="switchTab('personnes',this)">PERSONNES CLÉS</div>
+    <div class="nav-item" onclick="switchTab('direct',this)">🔴 DIRECT</div>
+  </nav>
+</header>
+
+<div class="rss-status-bar">
+  <span style="font-weight:700;color:var(--text2);letter-spacing:.15em;font-family:'Barlow Condensed',sans-serif;font-size:11px;flex-shrink:0;">SOURCES RSS:</span>
+  <div class="rss-source" id="rss-reuters"><div class="rss-dot rss-loading"></div>Reuters</div>
+  <div class="rss-source" id="rss-guardian"><div class="rss-dot rss-loading"></div>The Guardian</div>
+  <div class="rss-source" id="rss-bbc"><div class="rss-dot rss-loading"></div>BBC</div>
+  <div class="rss-source" id="rss-ap"><div class="rss-dot rss-loading"></div>AP News</div>
+  <div class="rss-source" id="rss-nyt"><div class="rss-dot rss-loading"></div>NY Times</div>
+  <div class="rss-source" id="rss-cnn"><div class="rss-dot rss-loading"></div>CNN</div>
+  <div class="rss-source" id="rss-pbs"><div class="rss-dot rss-loading"></div>PBS News</div>
+  <div class="rss-source" id="rss-alj"><div class="rss-dot rss-loading"></div>Al Jazeera</div>
+  <span style="margin-left:auto;font-size:9px;flex-shrink:0;" id="lastFetch">Initialisation...</span>
+</div>
+
+<div class="breaking-bar">
+  <div class="breaking-label">⚡ DERNIÈRE HEURE</div>
+  <div class="breaking-ticker"><div class="ticker-inner" id="tickerInner">
+    <span class="ticker-item">JANVIER 2026 : DOJ publie 3 millions de pages de documents Epstein</span>
+    <span class="ticker-item">Maxwell déplacée vers une prison à sécurité minimale au Texas après entretien avec DOJ</span>
+    <span class="ticker-item">Loi Epstein Files Transparency Act signée par Trump — novembre 2025</span>
+    <span class="ticker-item">Virginia Giuffre décède le 25 avril 2025 — mémoire posthume publiée en octobre</span>
+    <span class="ticker-item">Roi Charles III retire ses titres au prince Andrew — octobre 2025</span>
+    <span class="ticker-item">Le FBI confirme : aucune "liste de clients" Epstein n'a jamais existé — juillet 2025</span>
+    <span class="ticker-item">Bloomberg obtient 18 700 e-mails personnels d'Epstein — septembre 2025</span>
+    <span class="ticker-item">JANVIER 2026 : DOJ publie 3 millions de pages de documents Epstein</span>
+    <span class="ticker-item">Maxwell déplacée vers une prison à sécurité minimale au Texas après entretien avec DOJ</span>
+    <span class="ticker-item">Loi Epstein Files Transparency Act signée par Trump — novembre 2025</span>
+    <span class="ticker-item">Virginia Giuffre décède le 25 avril 2025 — mémoire posthume publiée en octobre</span>
+    <span class="ticker-item">Roi Charles III retire ses titres au prince Andrew — octobre 2025</span>
+    <span class="ticker-item">Le FBI confirme : aucune "liste de clients" Epstein n'a jamais existé — juillet 2025</span>
+  </div></div>
+</div>
+
+<div class="main-container">
+
+<!-- ===== ACCUEIL ===== -->
+
+<div id="tab-accueil" class="page-section">
+  <div class="stats-bar">
+    <div class="stat-block"><div class="stat-num red" id="statArticles">43</div><div class="stat-label">Articles indexés</div></div>
+    <div class="stat-block"><div class="stat-num">6</div><div class="stat-label">Dossiers thématiques</div></div>
+    <div class="stat-block"><div class="stat-num">11</div><div class="stat-label">Sources médias</div></div>
+    <div class="stat-block"><div class="stat-num red">3M+</div><div class="stat-label">Pages DOJ déclassifiées</div></div>
+  </div>
+
+  <div class="hero-section">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="hero-meta">
+          <span class="dossier-tag tag-red">DOSSIER PRINCIPAL · 2026</span>
+          <span class="article-date">Mise à jour : 30 janvier 2026</span>
+        </div>
+        <h1 class="hero-title">DOJ publie plus de 3 millions de pages — la plus grande divulgation de l'affaire Epstein</h1>
+        <p class="hero-excerpt">Le 30 janvier 2026, le Département américain de la Justice a publié plus de 3 millions de pages de documents, 2 000 vidéos et 180 000 images liés à Jeffrey Epstein, conformément à la loi Epstein Files Transparency Act promulguée en novembre 2025. Cette publication, décrite par le procureur adjoint Todd Blanche comme la plus grande de l'histoire de l'affaire, fait suite à une première vague du 19 décembre 2025 qui avait été critiquée de toutes parts pour ses nombreuses pages entièrement caviardées. Les fichiers incluent des communications d'Epstein avec des figures comme Bill Gates, Elon Musk, Steve Bannon, et Andrew Mountbatten-Windsor. Le FBI a par ailleurs confirmé en juillet 2025 qu'aucune "liste de clients" n'a jamais existé.</p>
+        <div class="article-footer">
+          <span class="article-source">AP News · PBS NewsHour · CBS News · Reuters</span>
+          <button class="read-btn" onclick="switchTab('dossiers',document.querySelectorAll('.nav-item')[1])">TOUS LES DOSSIERS →</button>
+        </div>
+      </div>
+      <div class="hero-sidebar">
+        <div class="sidebar-header-block">⚡ FLUX EN DIRECT</div>
+        <div class="sidebar-feed" id="liveFeed">
+          <div class="feed-item"><div class="loading-skeleton skeleton-line" style="width:60%"></div><div class="loading-skeleton skeleton-title"></div><div class="loading-skeleton skeleton-line" style="width:40%"></div></div>
+          <div class="feed-item"><div class="loading-skeleton skeleton-line" style="width:55%"></div><div class="loading-skeleton skeleton-title"></div><div class="loading-skeleton skeleton-line" style="width:35%"></div></div>
+        </div>
+        <!-- FreeCash Sidebar Card -->
+        <div class="fc-sidebar-card">
+          <div class="fc-sidebar-header">
+            <span class="fc-sidebar-icon">💰</span>
+            <span class="fc-sidebar-label">Gagne de l'argent</span>
+          </div>
+          <ul class="fc-sidebar-features">
+            <li>Bonus de bienvenue jusqu'à $250</li>
+            <li>Paiement PayPal, Bitcoin, cartes</li>
+            <li>Sondages, jeux et offres rémunérées</li>
+            <li>Inscription 100% gratuite</li>
+            <li>Des milliers de membres actifs</li>
+          </ul>
+          <a href="https://freecash.com/r/9MYR8" target="_blank" class="fc-sidebar-btn">🚀 REJOINDRE FREECASH</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <h2 class="section-title">Dossiers thématiques</h2>
+    <span class="section-count" id="totalArticlesCount">43 ARTICLES AU TOTAL</span>
+  </div>
+  <div class="dossiers-grid" id="dossierCardsHome"></div>
+
+  <div class="section-header" style="margin-top:8px;">
+    <h2 class="section-title">Articles les plus récents</h2>
+    <span class="section-count">DERNIÈRES PUBLICATIONS</span>
+  </div>
+  <div class="articles-grid" id="recentArticles"></div>
+</div>
+
+<!-- ===== DOSSIERS ===== -->
+
+<div id="tab-dossiers" class="page-section" style="display:none;">
+  <div class="section-header"><h2 class="section-title">Dossiers d'enquête</h2></div>
+  <div class="dossiers-grid" id="dossierCardsMain"></div>
+  <div id="dossierContent"></div>
+</div>
+
+<!-- ===== ARTICLES ===== -->
+
+<div id="tab-articles" class="page-section" style="display:none;">
+  <div class="section-header"><h2 class="section-title">Tous les articles</h2><span class="section-count" id="allArticlesCount">—</span></div>
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="filterArticles('all',this)">TOUS</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-1',this)">BIOGRAPHIE</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-2',this)">RÉSEAU</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-3',this)">PROCÈS</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-4',this)">MAXWELL</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-5',this)">DOCUMENTS</button>
+    <button class="filter-btn" onclick="filterArticles('dossier-6',this)">VICTIMES</button>
+    <div class="search-input-wrapper">
+      <span class="search-icon">⌕</span>
+      <input type="text" class="search-input" placeholder="Rechercher..." oninput="searchArticles(this.value)">
+    </div>
+  </div>
+  <div class="articles-grid" id="allArticlesGrid"></div>
+</div>
+
+<!-- ===== CHRONOLOGIE ===== -->
+
+<div id="tab-chronologie" class="page-section" style="display:none;">
+  <div class="section-header"><h2 class="section-title">Chronologie de l'affaire</h2><span class="section-count">1987 — JANVIER 2026</span></div>
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<!-- ===== PERSONNES ===== -->
+
+<div id="tab-personnes" class="page-section" style="display:none;">
+  <div class="section-header"><h2 class="section-title">Personnes clés</h2><span class="section-count">RÔLES ET STATUTS JUDICIAIRES</span></div>
+  <div class="persons-grid" id="personsGrid"></div>
+</div>
+
+<!-- ===== DIRECT ===== -->
+
+<div id="tab-direct" class="page-section" style="display:none;">
+  <div class="section-header"><h2 class="section-title"><span style="color:var(--red);margin-right:8px;">●</span>Flux en direct</h2><span class="section-count" id="directCount">—</span></div>
+  <div style="margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <div class="live-badge" style="color:var(--text2);"><div class="live-dot" style="background:#4ade80;"></div>Actualisation automatique toutes les 5 minutes</div>
+    <button class="read-btn" onclick="forceRefresh()" style="font-size:9px;padding:4px 11px;">↺ ACTUALISER</button>
+    <span id="directLastFetch" style="font-size:9px;color:var(--text3);">—</span>
+  </div>
+  <div class="articles-grid" id="directFeed"></div>
+</div>
+
+</div><!-- /main-container -->
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div style="max-width:580px;">
+      <strong style="color:rgba(245,240,232,.7);font-family:'Barlow Condensed',sans-serif;letter-spacing:.15em;font-size:12px;">AVERTISSEMENT LÉGAL</strong><br>
+      Ce site est un agrégateur d'informations journalistiques publiques. Les articles et faits présentés proviennent de sources médiatiques vérifiées (AP, Reuters, BBC, NY Times, PBS, CNN, CBS, NBC, Al Jazeera, TIME, Guardian). Les informations sont factuelles et documentées. La mention d'un nom dans des documents judiciaires ne constitue pas une preuve de culpabilité. Sources officielles : justice.gov/epstein
+    </div>
+    <div style="text-align:right;">
+      <div class="footer-stat" id="footerArticleCount">43</div>
+      <div style="font-size:9px;letter-spacing:.1em;margin-bottom:7px;">ARTICLES INDEXÉS</div>
+      <div class="footer-stat">11</div>
+      <div style="font-size:9px;letter-spacing:.1em;">SOURCES SURVEILLÉES</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// DATA — VRAIS ARTICLES VÉRIFIÉS (sources journalistiques)
+// ============================================================
+const dossiers = [
+  { id:'dossier-1', icon:'📁', name:'Biographie & Ascension', desc:'Origines, fortune, réseau social et montée en puissance.', color:'tag-ink', articles:[] },
+  { id:'dossier-2', icon:'🕸️', name:'Réseau & Complicités', desc:'Personnalités impliquées, connexions politiques, financières et mondiales.', color:'tag-red', articles:[] },
+  { id:'dossier-3', icon:'⚖️', name:'Procès & Condamnations', desc:'Procédures judiciaires, accord 2008, arrestation 2019, mort en prison.', color:'tag-blue', articles:[] },
+  { id:'dossier-4', icon:'🔒', name:'Ghislaine Maxwell', desc:'Rôle central de Maxwell, arrestation 2020 et condamnation à 20 ans.', color:'tag-purple', articles:[] },
+  { id:'dossier-5', icon:'📄', name:'Documents Déclassifiés', desc:'Déclassifications DOJ 2024-2026, loi Transparency Act, emails.', color:'tag-gold', articles:[] },
+  { id:'dossier-6', icon:'🤝', name:'Victimes & Témoignages', desc:'Giuffre, Sjoberg, Farmer — témoignages, procès civils et héritage.', color:'tag-green', articles:[] }
+];
+
+const realArticles = [
+  // ===== DOSSIER 5 — DOCUMENTS DÉCLASSIFIÉS =====
+  { id:1, title:"DOJ publie plus de 3 millions de pages de documents Epstein — la plus grande divulgation de l'histoire", excerpt:"Le 30 janvier 2026, le Département de la Justice américain publie 3 millions de pages, 2 000 vidéos et 180 000 images. Cette divulgation massive fait suite à la loi Epstein Files Transparency Act promulguée en novembre 2025. Les fichiers incluent les communications d'Epstein avec Bill Gates, Elon Musk, Steve Bannon, l'ancien prince Andrew et le co-propriétaire des New York Giants Steve Tisch.", source:"Associated Press / PBS NewsHour", date:"2026-01-30", dossier:"dossier-5", url:"https://www.pbs.org/newshour/nation/the-latest-epstein-files-release-includes-famous-names-and-new-details-about-an-earlier-investigation", isNew:true },
+  { id:2, title:"Loi Epstein Files Transparency Act : Trump signe la loi forçant la déclassification totale des fichiers", excerpt:"Le 19 novembre 2025, le Congrès américain adopte à l'unanimité la loi Epstein Files Transparency Act. Trump la promulgue le lendemain. La loi impose au DOJ de rendre publics la quasi-totalité des documents collectés lors de deux décennies d'enquêtes sur Epstein. Une première publication le 19 décembre 2025 est critiquée pour ses centaines de pages entièrement caviardées.", source:"Associated Press / U.S. News", date:"2025-11-19", dossier:"dossier-5", url:"https://www.usnews.com/news/politics/articles/2025-12-19/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:true },
+  { id:3, title:"Le FBI confirme officiellement : aucune 'liste de clients' Epstein n'a jamais existé", excerpt:"En juillet 2025, le DOJ publie un mémo concluant qu'aucune 'liste de clients' n'existait dans les dossiers Epstein. Ce document contredit les déclarations de la procureure générale Pam Bondi qui affirmait en février 2025 que cette liste 'était sur son bureau'. Des agents du FBI avaient écrit à leur hiérarchie dès le 19 février 2025 pour confirmer qu'aucune telle liste n'avait été trouvée.", source:"AP News / ABC News", date:"2025-07-07", dossier:"dossier-5", url:"https://abcnews.com/US/wireStory/takeaways-epstein-files-show-fbi-investigation-sex-trafficking-129968098", isNew:true },
+  { id:4, title:"Première publication DOJ du 19 décembre 2025 : noms célèbres, mais 550 pages entièrement caviardées", excerpt:"Les fichiers publiés le 19 décembre incluent des photos de Mick Jagger, Michael Jackson, Diana Ross, Bill Clinton, et Prince Andrew. Un document de 119 pages 'Grand Jury-NY' est totalement noirci. 550 pages sont entièrement caviardées. Le DOJ reconnaît que 6 millions de pages pourraient être publiables mais dit avoir rempli ses obligations légales.", source:"Al Jazeera / PBS NewsHour", date:"2025-12-19", dossier:"dossier-5", url:"https://www.aljazeera.com/news/2025/12/21/epstein-files-whose-names-and-photos-are-in-the-latest-document-drop", isNew:true },
+  { id:5, title:"Bloomberg obtient 18 700 e-mails personnels d'Epstein — révélations sur ses connexions mondiales", excerpt:"En septembre 2025, Bloomberg News obtient de manière indépendante environ 18 700 e-mails du compte Yahoo personnel d'Epstein, couvrant la période 2002-2022. Ces e-mails révèlent l'étendue de ses connexions dans les milieux politiques, académiques et financiers internationaux.", source:"Bloomberg News", date:"2025-09-01", dossier:"dossier-5", url:"https://en.wikipedia.org/wiki/Epstein_files", isNew:false },
+  { id:6, title:"Janvier 2024 : 4 553 pages déclassifiées dans l'affaire Giuffre v. Maxwell — 150 noms révélés", excerpt:"En janvier 2024, la juge fédérale Loretta Preska ordonne la déclassification de 4 553 pages de documents du procès Giuffre contre Maxwell (2015). Plus de 150 noms d'associés sont mentionnés. Clinton apparaît plus de 50 fois. Le prince Andrew, Dershowitz, Richardson, Wexner sont cités. La mention dans les documents ne constitue pas une preuve de culpabilité.", source:"NBC News / TIME", date:"2024-01-10", dossier:"dossier-5", url:"https://www.nbcnews.com/news/us-news/last-batch-unsealed-jeffrey-epstein-documents-released-rcna132936", isNew:false },
+  { id:7, title:"Documents DOJ : le FBI savait dès 1996 — Maria Farmer avait signalé Epstein au FBI", excerpt:"Un document publié en décembre 2025 confirme que le FBI avait été alerté dès septembre 1996 par la victime Maria Farmer sur les crimes d'Epstein contre des enfants. Les agents n'ont pris aucune mesure pendant près d'une décennie. Ce retard fait partie des enquêtes sur les défaillances institutionnelles.", source:"Al Jazeera", date:"2025-12-21", dossier:"dossier-5", url:"https://www.aljazeera.com/news/2025/12/21/epstein-files-whose-names-and-photos-are-in-the-latest-document-drop", isNew:false },
+  { id:8, title:"Pam Bondi et la 'liste fantôme' : la procureure générale contredite par ses propres agents du FBI", excerpt:"Le 21 février 2025, Pam Bondi déclare sur Fox News que la liste des clients d'Epstein 'est sur mon bureau'. Deux jours avant, le 19 février, un agent superviseur du FBI avait écrit en interne que les enquêteurs 'n'avaient pas localisé une telle liste'. Le 27 février, Bondi publie des documents sans révélation significative.", source:"AP News / ABC News", date:"2025-02-27", dossier:"dossier-5", url:"https://abcnews.com/US/wireStory/takeaways-epstein-files-show-fbi-investigation-sex-trafficking-129968098", isNew:false },
+  { id:9, title:"Documents FBI : Epstein abusait de mineures, mais peu de preuves d'un réseau organisé pour hommes puissants", excerpt:"Une revue interne des documents DOJ par l'AP révèle que le FBI a rassemblé des preuves solides des abus sexuels d'Epstein sur des mineures, mais a trouvé peu de preuves qu'il dirigeait un réseau de trafic sexuel au service d'hommes puissants. Les vidéos saisies ne montrent pas de victimes abusées ni n'impliquent d'autres personnes.", source:"Associated Press", date:"2026-02-09", dossier:"dossier-5", url:"https://abcnews.com/US/wireStory/takeaways-epstein-files-show-fbi-investigation-sex-trafficking-129968098", isNew:true },
+  { id:10, title:"Comité de la Chambre publie des milliers d'e-mails : Bannon, Summers, Hoffman et Prince Andrew", excerpt:"Le 12 novembre 2025, un comité de la Chambre des représentants publie des milliers d'e-mails d'Epstein avec Andrew Mountbatten-Windsor, Steve Bannon, l'ancien secrétaire au Trésor Larry Summers et le fondateur de LinkedIn Reid Hoffman. Dans un email de 2019 à un journaliste, Epstein écrit que Trump 'savait pour les filles'.", source:"PBS NewsHour / AP", date:"2025-11-12", dossier:"dossier-5", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+
+  // ===== DOSSIER 3 — PROCÈS =====
+  { id:11, title:"L'accord de plaidoyer controversé de 2008 : Alexander Acosta et l'accord secret de non-poursuite fédérale", excerpt:"En 2008, le procureur fédéral Alexander Acosta de Miami signe un accord secret permettant à Epstein d'éviter les poursuites fédérales en plaidant coupable de sollicitation de prostitution de mineur au niveau de l'État. L'accord, gardé confidentiel, couvre aussi d'éventuels co-conspirateurs. Epstein est condamné à 18 mois de prison avec travail extérieur.", source:"Miami Herald / AP", date:"2008-06-30", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:12, title:"Arrestation fédérale de juillet 2019 : Epstein inculpé de trafic sexuel de mineures dans plusieurs États", excerpt:"Le 6 juillet 2019, Jeffrey Epstein est arrêté par le FBI à l'aéroport Teterboro du New Jersey à son retour d'Europe. Il est inculpé de trafic sexuel de mineures et de complot. Le procureur américain Geoffrey Berman déclare que des dizaines de victimes sont concernées. Epstein plaide non coupable.", source:"AP News / New York Times", date:"2019-07-06", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:13, title:"Mort d'Epstein le 10 août 2019 : suicide officiel, mais les questions persistent", excerpt:"Jeffrey Epstein est retrouvé mort dans sa cellule du Metropolitan Correctional Center de New York le 10 août 2019. Le médecin légiste de la ville conclut à un suicide par pendaison. Des irrégularités dans la surveillance — caméras défectueuses, gardiens endormis — alimentent les théories. Le DOJ confirme la conclusion suicide en 2025.", source:"AP News / New York Times", date:"2019-08-10", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:14, title:"Miami Herald 2018 : l'enquête d'investigation qui relance l'affaire Epstein et force le DOJ à agir", excerpt:"En novembre 2018, une série d'articles de la journaliste Julie K. Brown dans le Miami Herald révèle les détails de l'accord de 2008 et les témoignages des victimes. Ces articles relancent l'intérêt des procureurs fédéraux de New York, conduisant directement à l'arrestation d'Epstein en 2019.", source:"Miami Herald", date:"2018-11-28", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:15, title:"JPMorgan condamné à payer 290 millions de dollars pour avoir facilité le réseau Epstein", excerpt:"En octobre 2023, JPMorgan Chase accepte de payer 290 millions de dollars pour régler des poursuites alléguant que la banque a maintenu des relations avec Epstein malgré des signaux d'alarme sur ses activités criminelles. Deutsche Bank a également payé 75 millions de dollars dans une affaire similaire.", source:"Reuters / New York Times", date:"2023-10-06", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:16, title:"Acosta contraint de démissionner en juillet 2019 : son accord secret avec Epstein sous les projecteurs", excerpt:"Sous pression après l'arrestation d'Epstein, Alexander Acosta démissionne le 12 juillet 2019 de son poste de secrétaire au Travail. Son rôle dans l'accord de non-poursuite de 2008, qui avait protégé Epstein de poursuites fédérales, fait l'objet d'une enquête du DOJ.", source:"AP News", date:"2019-07-12", dossier:"dossier-3", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+
+  // ===== DOSSIER 4 — MAXWELL =====
+  { id:17, title:"Condamnation de Ghislaine Maxwell à 20 ans de prison — le verdict du 28 juin 2022", excerpt:"Le 28 juin 2022, Ghislaine Maxwell est condamnée à 20 ans de prison fédérale par le tribunal de Manhattan. Reconnue coupable de cinq chefs d'accusation de trafic sexuel, recrutement de victimes mineures et complot, Maxwell est considérée comme la principale complice d'Epstein pendant trois décennies.", source:"BBC News / AP", date:"2022-06-28", dossier:"dossier-4", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:18, title:"Procès Maxwell (novembre 2021) : quatre semaines de témoignages dévastateurs", excerpt:"Le procès de Ghislaine Maxwell s'ouvre le 29 novembre 2021. Pendant quatre semaines, des victimes témoignent de la façon dont Maxwell les a recrutées, manipulées et livrées à Epstein. Le jury la déclare coupable le 29 décembre 2021 de cinq des six chefs d'accusation.", source:"New York Times / AP", date:"2021-12-29", dossier:"dossier-4", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:19, title:"Arrestation de Maxwell en juillet 2020 : cachée dans le New Hampshire, retrouvée par le FBI", excerpt:"Ghislaine Maxwell est arrêtée le 2 juillet 2020 dans une propriété de Bradford, New Hampshire, où elle s'était retirée. Le FBI avait surveillé ses mouvements pendant des mois. Elle est inculpée de six chefs d'accusation incluant recrutement de mineures et parjure.", source:"Reuters / New York Times", date:"2020-07-02", dossier:"dossier-4", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:20, title:"Maxwell transférée dans une prison à sécurité minimale au Texas après entretien avec le DOJ", excerpt:"Fin juillet 2025, après un entretien avec le procureur adjoint Todd Blanche où Maxwell nie tout acte répréhensible et affirme n'avoir jamais vu Trump dans aucune activité sexuellement inappropriée, Maxwell est transférée d'une prison de Floride vers un camp à sécurité minimale au Texas.", source:"PBS NewsHour / AP", date:"2025-07-25", dossier:"dossier-4", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:21, title:"Documents 2024 : Maxwell qualifie Giuffre d'  'awful fantasist' dans ses propres dépositions", excerpt:"Les documents déclassifiés de janvier 2024 révèlent des extraits de dépositions de Maxwell où elle qualifie Virginia Roberts Giuffre de 'fantaisiste horrible'. Maxwell y affirme aussi que Dershowitz a joué un rôle clé dans la négociation de l'accord de non-poursuite fédérale.", source:"NBC News / Axios", date:"2024-01-10", dossier:"dossier-4", url:"https://www.nbcnews.com/news/us-news/last-batch-unsealed-jeffrey-epstein-documents-released-rcna132936", isNew:false },
+  { id:22, title:"Maxwell et ses fonctions au sein du réseau : recrutement, voyages, organisation logistique", excerpt:"Les documents judiciaires révèlent que Maxwell supervisait le recrutement de victimes (souvent jeunes, vulnérables), organisait les voyages sur l'île et dans les propriétés, et participait parfois aux abus. Elle était aussi chargée de maintenir le carnet d'adresses d'Epstein.", source:"CNN / Al Jazeera", date:"2024-01-05", dossier:"dossier-4", url:"https://www.cnn.com/2024/01/03/business/jeffrey-epstein-documents-list-names", isNew:false },
+
+  // ===== DOSSIER 6 — VICTIMES =====
+  { id:23, title:"Virginia Giuffre décède le 25 avril 2025 — figure centrale de l'affaire Epstein", excerpt:"Virginia Roberts Giuffre, principale accusatrice d'Epstein et témoin clé dans le procès Maxwell, décède par suicide le 25 avril 2025 à l'âge de 41 ans. Elle avait consacré des années à combattre pour la justice. Sa mémoire posthume est publiée le 21 octobre 2025, dans laquelle elle réaffirme ses accusations contre le prince Andrew.", source:"PBS NewsHour / AP", date:"2025-04-25", dossier:"dossier-6", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:24, title:"Déposition de Johanna Sjoberg : 'J'ai vu le prince Andrew toucher Giuffre dans la maison d'Epstein'", excerpt:"La déposition de Johanna Sjoberg (2016), déclassifiée en janvier 2024, est l'un des témoignages les plus détaillés. Elle confirme avoir vu Virginia Giuffre, alors âgée de 17 ans, en présence du prince Andrew, Epstein et Maxwell dans la résidence new-yorkaise. Elle décrit une photo prise avec une marionnette 'Prince Andrew'.", source:"CNN / Al Jazeera", date:"2024-01-04", dossier:"dossier-6", url:"https://www.cnn.com/2024/01/03/business/jeffrey-epstein-documents-list-names", isNew:false },
+  { id:25, title:"Giuffre : Epstein l'a trafiquée vers Richardson, Brunel, Dershowitz et d'autres", excerpt:"Dans sa déposition (2015), Virginia Giuffre allègue que Maxwell l'a envoyée avoir des rapports sexuels avec plusieurs personnalités, dont l'ancien gouverneur du Nouveau-Mexique Bill Richardson, le scout de mannequins Jean-Luc Brunel, l'avocat Alan Dershowitz et le gestionnaire de fonds Glenn Dubin. Tous nient ou contestent ces allégations.", source:"CNN / Al Jazeera / TIME", date:"2024-01-04", dossier:"dossier-6", url:"https://www.aljazeera.com/news/2024/1/4/jeffrey-epstein-list-whose-names-are-on-the-newly-unsealed-documents", isNew:false },
+  { id:26, title:"Maria Farmer, première victime à alerter le FBI en 1996 : 'Les agents n'ont rien fait'", excerpt:"Maria Farmer a été l'une des premières à contacter le FBI en septembre 1996 pour signaler les crimes d'Epstein sur des enfants. Des documents déclassifiés en décembre 2025 confirment que le FBI avait bien reçu sa plainte mais n'a pas agi pendant près d'une décennie, permettant les abus de se poursuivre.", source:"Al Jazeera", date:"2025-12-21", dossier:"dossier-6", url:"https://www.aljazeera.com/news/2025/12/21/epstein-files-whose-names-and-photos-are-in-the-latest-document-drop", isNew:false },
+  { id:27, title:"Mémoire posthume de Giuffre publiée — elle réaffirme ses accusations contre Prince Andrew", excerpt:"La mémoire posthume de Virginia Roberts Giuffre est publiée le 21 octobre 2025. Dans cet ouvrage, elle réitère ses accusations selon lesquelles Epstein et Maxwell l'ont trafiquée vers de puissants hommes, dont Andrew Mountbatten-Windsor, et décrit en détail les circonstances des abus.", source:"PBS NewsHour", date:"2025-10-21", dossier:"dossier-6", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:28, title:"Jean-Luc Brunel retrouvé mort en prison à Paris en 2022 — sous enquête pour viols", excerpt:"Jean-Luc Brunel, ancien directeur d'agence de mannequins et proche d'Epstein, est retrouvé mort dans sa cellule à la prison de la Santé à Paris le 19 février 2022. Il était en détention depuis décembre 2020 dans le cadre d'une enquête française pour viol et proxénétisme de mineurs.", source:"Reuters / TIME", date:"2022-02-19", dossier:"dossier-6", url:"https://time.com/6552063/jeffrey-epsteins-unsealed-court-documents/", isNew:false },
+  { id:29, title:"Victimes exigent que l'identité de 31 mineurs soit protégée dans les publications DOJ", excerpt:"Des avocats représentant un groupe de survivantes accusent le DOJ d'avoir manqué à son devoir en ne caviardant pas les identités d'au moins 31 personnes qui ont été victimes d'abus alors qu'elles étaient mineures, dans le cadre de la publication des documents de janvier 2026.", source:"CBS News", date:"2026-01-30", dossier:"dossier-6", url:"https://www.cbsnews.com/live-updates/epstein-files-released-doj-2026/", isNew:true },
+
+  // ===== DOSSIER 2 — RÉSEAU =====
+  { id:30, title:"Prince Andrew perd tous ses titres royaux — le roi Charles III l'expulse de sa résidence", excerpt:"Le 30 octobre 2025, le roi Charles III retire à Andrew Mountbatten-Windsor tous ses titres restants, y compris celui de 'prince'. Il est également expulsé de sa résidence royale. Cette décision intervient après la mort de Giuffre et la publication de sa mémoire posthume réaffirmant ses accusations.", source:"PBS NewsHour / AP", date:"2025-10-30", dossier:"dossier-2", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:31, title:"Accord à l'amiable du prince Andrew avec Giuffre en 2022 : fin des poursuites civiles sans aveu", excerpt:"Le 15 février 2022, le prince Andrew conclut un accord financier confidentiel avec Virginia Giuffre, mettant fin à son procès civil aux États-Unis. L'accord, dont le montant n'est pas divulgué, ne constitue pas un aveu de culpabilité. Andrew a toujours nié avoir eu des rapports sexuels avec Giuffre.", source:"BBC News / The Guardian", date:"2022-02-15", dossier:"dossier-2", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:32, title:"Documents 2024 : Clinton cité plus de 50 fois, Richardson et Dershowitz listés comme témoins clés", excerpt:"Les 4 553 pages déclassifiées de janvier 2024 citent Bill Clinton plus de 50 fois. Les avocats de Giuffre voulaient le déposer comme 'personne clé pouvant fournir des informations sur sa relation avec Maxwell et Epstein'. Richardson est accusé d'avoir reçu des massages. Clinton nie tout acte répréhensible.", source:"Axios / TIME", date:"2024-01-04", dossier:"dossier-2", url:"https://www.axios.com/2024/01/04/jeffrey-epstein-ghislaine-maxwell-associates-list", isNew:false },
+  { id:33, title:"Documents DOJ 2026 : Dr. Mehmet Oz, Brett Ratner parmi les noms révélés par les fichiers financiers", excerpt:"Les fichiers DOJ publiés en janvier 2026 révèlent qu'Epstein a payé les frais de voyage du Dr Mehmet Oz en 2004 pour 1 592 dollars. Des photos montrent le réalisateur Brett Ratner avec Epstein. Ces révélations surviennent alors qu'Oz dirige l'agence CMS et que Ratner vient de réaliser un documentaire sur Melania Trump.", source:"CBS News", date:"2026-01-31", dossier:"dossier-2", url:"https://www.cbsnews.com/live-updates/epstein-files-released-doj-2026/", isNew:true },
+  { id:34, title:"Les îles d'Epstein : Little St. James, infrastructure criminelle aux Îles Vierges américaines", excerpt:"L'île privée de Little St. James, achetée par Epstein en 1996 pour 7,95 millions de dollars, était le centre névralgique de ses activités. Surnommée 'Pedophile Island' par les habitants locaux, elle possédait un temple mystérieux et des installations souterraines. Le FBI a fouillé l'île en 2019.", source:"AP / The Guardian", date:"2019-08-12", dossier:"dossier-2", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:35, title:"Trump et Epstein : des voisins de Palm Beach à l'accusation — chronologie d'une relation", excerpt:"Donald Trump et Epstein se connaissaient depuis les années 1980. Trump l'avait qualifié de 'terrific guy' en 2002. Il a ensuite dit avoir eu une brouille avec lui. Un document de la maison de fête de 2003 pour les 50 ans d'Epstein contiendrait une lettre au nom de Trump, ce que l'actuel président nie.", source:"Wall Street Journal / PBS", date:"2025-07-17", dossier:"dossier-2", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:36, title:"Leslie Wexner et Epstein : comment le milliardaire Victoria's Secret a financé et logé Epstein à Manhattan", excerpt:"Leslie Wexner, fondateur de L Brands (Victoria's Secret), a cédé à Epstein sa résidence de Manhattan en 1995, l'une des plus grandes maisons privées de la ville. Documents déclassifiés et témoignages suggèrent une relation financière profonde entre les deux hommes, aujourd'hui inexpliquée.", source:"TIME / Axios", date:"2024-01-08", dossier:"dossier-2", url:"https://time.com/6552063/jeffrey-epsteins-unsealed-court-documents/", isNew:false },
+
+  // ===== DOSSIER 1 — BIOGRAPHIE =====
+  { id:37, title:"Jeffrey Epstein : de professeur de lycée à milliardaire — l'ascension inexpliquée d'un financier sans diplôme", excerpt:"Sans diplôme universitaire, Epstein enseigne au Dalton School de New York dans les années 1970, y rencontrant des fils de milliardaires. Il entre chez Bear Stearns et crée sa propre société en 1987. Sa fortune, estimée à plus d'un milliard de dollars, reste largement inexpliquée. Il gérait les actifs de milliardaires en refusant toute transparence.", source:"Vanity Fair / New York Times", date:"2019-07-06", dossier:"dossier-1", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:38, title:"Epstein et MIT Media Lab : comment des millions corrompus ont ouvert les portes de l'élite académique", excerpt:"Après sa condamnation de 2008, Epstein a continué à fréquenter l'élite académique grâce à des dons multimillionnaires au MIT Media Lab, Harvard, et d'autres institutions. Joi Ito, directeur du MIT Media Lab, démissionne en 2019 quand ces liens sont révélés. Epstein avait rencontré Bill Gates, Lawrence Summers et d'autres dirigeants lors de ces visites.", source:"The New Yorker / Boston Globe", date:"2019-09-07", dossier:"dossier-1", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:39, title:"Le réseau de propriétés d'Epstein : 8 résidences de luxe au service d'un réseau criminel mondial", excerpt:"Epstein possédait la plus grande maison privée de Manhattan (9 East 71st Street), une villa de Palm Beach en Floride, un ranch au Nouveau-Mexique, une résidence à Paris, deux avions privés et l'île Little St. James. Ces propriétés constituaient l'infrastructure logistique de ses activités criminelles.", source:"Washington Post / AP", date:"2021-11-22", dossier:"dossier-1", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:40, title:"Le 'Lolita Express' : les journaux de vol révèlent des dizaines de personnalités à bord", excerpt:"Le Boeing 727 privé d'Epstein, surnommé 'Lolita Express', a transporté des personnalités dont Clinton (26 vols selon certains registres), le prince Andrew, Dershowitz, Hawking et d'autres. Les journaux de vol ont été rendus publics au fil des années et forment une partie essentielle des investigations.", source:"Flight Logs / AP", date:"2015-01-01", dossier:"dossier-1", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:41, title:"Documents 2025 : l'employé d'Epstein qui devait étaler des billets de 100 dollars et nettoyer après les massages", excerpt:"Les fichiers DOJ de 2026 incluent des notes d'entretien du FBI avec un employé (nom caviardé) de la propriété d'Epstein en Floride, qui décrit ses fonctions : étaler des billets de 100 dollars sur une table, placer une arme entre les matelas et nettoyer après les 'massages fréquents avec de jeunes filles', y compris jeter les préservatifs usagés.", source:"PBS NewsHour / AP", date:"2026-01-31", dossier:"dossier-1", url:"https://www.pbs.org/newshour/nation/the-latest-epstein-files-release-includes-famous-names-and-new-details-about-an-earlier-investigation", isNew:true },
+  { id:42, title:"Enquête de Palm Beach 2005 : 36 victimes potentielles identifiées, mais l'affaire étouffée", excerpt:"L'enquête débute en 2005 quand les parents d'une fille de 14 ans signalent un abus à la police de Palm Beach. La police identifie 36 victimes potentielles et recommande des chefs d'inculpation graves. Mais une série de pressions politiques et judiciaires résulte en l'accord controversé de 2008.", source:"Miami Herald", date:"2005-01-01", dossier:"dossier-1", url:"https://www.pbs.org/newshour/politics/a-timeline-of-the-jeffrey-epstein-investigation-and-the-fight-to-make-the-governments-files-public", isNew:false },
+  { id:43, title:"Le FBI enquêtait sur Epstein dès juillet 2006 — un projet d'inculpation abandonné en 2007", excerpt:"Des documents révèlent que le FBI a commencé à enquêter sur Epstein en juillet 2006. En mai 2007, les agents s'attendaient à une inculpation imminente. Un procureur avait rédigé un projet d'acte d'accusation incluant Epstein et trois assistants. Mais Acosta a finalement choisi l'accord de non-poursuite fédérale.", source:"PBS NewsHour / AP", date:"2026-01-30", dossier:"dossier-1", url:"https://www.pbs.org/newshour/nation/the-latest-epstein-files-release-includes-famous-names-and-new-details-about-an-earlier-investigation", isNew:true }
+];
+
+// Assign articles to dossiers
+realArticles.forEach(a => {
+  const d = dossiers.find(x => x.id === a.dossier);
+  if (d) d.articles.push(a);
+});
+
+// Timeline events with real sources
+const timelineEvents = [
+  { date:"1987", title:"Création de J. Epstein & Co.", desc:"Epstein fonde sa société de gestion de fortune privée après avoir quitté Bear Stearns. Il gère des actifs de milliardaires sans licence officielle.", milestone:false, source:"Vanity Fair" },
+  { date:"1991–1995", title:"Rencontre avec Ghislaine Maxwell", desc:"Epstein rencontre Maxwell, fille du magnat des médias Robert Maxwell. Elle devient sa petite amie puis sa principale collaboratrice dans ses activités criminelles.", milestone:false, source:"Documents judiciaires" },
+  { date:"1996", title:"Acquisition de Little St. James", desc:"Epstein achète l'île privée aux Îles Vierges américaines. Il y fait construire un manoir et un temple mystérieux. Elle deviendra le centre de ses activités criminelles.", milestone:true, source:"Registres fonciers" },
+  { date:"Septembre 1996", title:"Maria Farmer alerte le FBI — aucune suite donnée", desc:"La victime Maria Farmer contacte le FBI pour signaler les crimes d'Epstein sur des mineurs. Les agents ne donnent pas suite, permettant aux abus de se poursuivre pendant neuf ans.", milestone:true, source:"Documents DOJ 2025" },
+  { date:"2002", title:"Trump qualifie Epstein de 'terrific guy'", desc:"Dans une interview au New York Magazine, Trump dit d'Epstein : 'C'est un type formidable, il aime vraiment les belles femmes autant que moi, et beaucoup d'entre elles sont jeunes.' Il affirme ensuite avoir rompu les ponts.", milestone:false, source:"New York Magazine" },
+  { date:"Juillet 2006", title:"Le FBI ouvre une enquête sur Epstein", desc:"Après l'enquête de police de Palm Beach, le FBI ouvre formellement une enquête fédérale. Des agents s'attendent à une inculpation en mai 2007.", milestone:true, source:"Documents DOJ 2026" },
+  { date:"2008", title:"Accord secret de non-poursuite fédérale — Acosta", desc:"Le procureur Acosta conclut un accord gardé secret permettant à Epstein d'éviter les poursuites fédérales. Epstein plaide coupable de sollicitation de prostitution de mineur au niveau de l'État. Condamné à 18 mois, il bénéficie d'un régime de semi-liberté.", milestone:true, source:"Miami Herald" },
+  { date:"Juillet 2009", title:"Epstein libéré — poursuit ses activités mondiales", desc:"Libéré après 13 mois (avec sorties quotidiennes), Epstein reprend ses activités. Il continue de fréquenter l'élite mondiale, fréquentant universités et cercles politiques.", milestone:false, source:"AP News" },
+  { date:"Janvier 2015", title:"Virginia Giuffre dépose une plainte civile", desc:"Giuffre dépose une plainte civile contre Maxwell, alléguant qu'Epstein l'a trafiquée vers le prince Andrew et d'autres personnalités. Ce procès produira les documents déclassifiés de 2024.", milestone:true, source:"Documents judiciaires" },
+  { date:"Novembre 2018", title:"Miami Herald — l'enquête qui relance tout", desc:"La journaliste Julie K. Brown publie une série d'articles révélant les détails de l'accord de 2008. Ces articles provoquent un tollé national et conduisent à la réouverture des enquêtes fédérales.", milestone:true, source:"Miami Herald" },
+  { date:"6 Juillet 2019", title:"Arrestation fédérale d'Epstein à l'aéroport Teterboro", desc:"Epstein est arrêté par le FBI à son retour d'Europe. Inculpé de trafic sexuel de mineures. Il plaide non coupable. Le procureur dit des dizaines de victimes sont concernées.", milestone:true, source:"AP News" },
+  { date:"10 Août 2019", title:"Mort d'Epstein en détention — suicide officiel", desc:"Epstein est retrouvé mort dans sa cellule du Metropolitan Correctional Center. Suicide par pendaison selon le médecin légiste. Les caméras de surveillance étaient défectueuses, les gardiens endormis.", milestone:true, source:"AP / DOJ 2025" },
+  { date:"2 Juillet 2020", title:"Arrestation de Ghislaine Maxwell dans le New Hampshire", desc:"Maxwell est arrêtée dans une propriété où elle se cachait. Inculpée de six chefs d'accusation incluant recrutement de mineures et parjure.", milestone:true, source:"Reuters" },
+  { date:"29 Décembre 2021", title:"Maxwell déclarée coupable sur cinq chefs d'accusation", desc:"Le jury reconnaît Maxwell coupable de cinq des six chefs d'accusation après un mois de procès. Les témoignages des victimes ont été déterminants.", milestone:true, source:"AP / BBC" },
+  { date:"28 Juin 2022", title:"Maxwell condamnée à 20 ans de réclusion criminelle", desc:"Le juge de Manhattan condamne Maxwell à 20 ans de prison fédérale pour trafic sexuel de mineures et complot.", milestone:true, source:"BBC / AP" },
+  { date:"15 Février 2022", title:"Prince Andrew signe un accord à l'amiable avec Giuffre", desc:"Sans admettre sa culpabilité, Andrew Mountbatten-Windsor paye un montant confidentiel pour régler les poursuites civiles de Giuffre. Il est retiré de ses fonctions militaires et royales.", milestone:true, source:"BBC / The Guardian" },
+  { date:"Janvier 2024", title:"4 553 pages déclassifiées : 150 noms révélés", desc:"La juge Preska ordonne la déclassification des documents du procès Giuffre c. Maxwell (2015). Clinton cité 50+ fois. Sjoberg, Dershowitz, Richardson, Wexner nommés.", milestone:true, source:"NBC News / TIME" },
+  { date:"Novembre 2025", title:"Loi Epstein Files Transparency Act — Trump promulgue", desc:"Le Congrès adopte et Trump signe la loi forçant le DOJ à publier ses documents sur Epstein. La première publication (19 déc.) est critiquée pour ses nombreuses pages caviardées.", milestone:true, source:"AP / US News" },
+  { date:"25 Avril 2025", title:"Décès de Virginia Giuffre par suicide", desc:"Virginia Roberts Giuffre, 41 ans, principale accusatrice d'Epstein, décède par suicide. Sa famille et ses partisans expriment leur douleur. Sa mémoire posthume sera publiée en octobre.", milestone:true, source:"PBS NewsHour" },
+  { date:"30 Octobre 2025", title:"Roi Charles III dépouille le prince Andrew de ses titres", desc:"Suite aux révélations de la mémoire posthume de Giuffre et à la pression publique, Charles III retire à son frère tous ses titres restants et l'expulse de sa résidence royale.", milestone:true, source:"AP / PBS" },
+  { date:"30 Janvier 2026", title:"3 millions de pages publiées par le DOJ — la plus grande divulgation de l'affaire", desc:"Le DOJ publie plus de 3 millions de pages, 2 000 vidéos et 180 000 images. Les fichiers incluent des communications avec Gates, Musk, Bannon, Andrew. Des survivantes dénoncent des lacunes dans la protection des identités.", milestone:true, source:"AP / CBS / PBS" }
+];
+
+const persons = [
+  { icon:'💀', name:'Jeffrey Epstein', role:'Financier, organisateur principal du réseau de trafic sexuel (1987–2019)', status:'deceased', statusLabel:'Décédé 10/08/2019' },
+  { icon:'🔒', name:'Ghislaine Maxwell', role:'Recrutrice, co-conspiratrice principale. Condamnée à 20 ans en 2022', status:'convicted', statusLabel:'Condamnée 20 ans' },
+  { icon:'👑', name:'Prince Andrew', role:'Ami proche d\'Epstein. Accusé par Giuffre d\'abus sexuels. Accord financier 2022. Titres retirés 2025', status:'accused', statusLabel:'Titres retirés 2025' },
+  { icon:'⚖️', name:'Alan Dershowitz', role:'Avocat d\'Epstein, a négocié l\'accord 2008. Accusé par Jane Doe 3. Nie tout acte répréhensible', status:'investigated', statusLabel:'Cité dans docs' },
+  { icon:'🏛️', name:'Alexander Acosta', role:'Procureur qui a accordé l\'immunité à Epstein en 2008. Ex-Secrétaire au Travail. Démissionné 2019', status:'investigated', statusLabel:'Démissionné 2019' },
+  { icon:'🌿', name:'Virginia Giuffre', role:'Principale victime et témoin clé. Décédée par suicide le 25/04/2025, âgée de 41 ans', status:'witness', statusLabel:'Décédée 2025' },
+  { icon:'💼', name:'Leslie Wexner', role:'Milliardaire fondateur de L Brands, a cédé sa résidence à Epstein. Cité dans documents', status:'investigated', statusLabel:'Cité dans docs' },
+  { icon:'📸', name:'Jean-Luc Brunel', role:'Scout de mannequins français, accusé de trafic de mineures. Mort en prison à Paris, 2022', status:'deceased', statusLabel:'Décédé 2022' },
+  { icon:'🔍', name:'Johanna Sjoberg', role:'Victime et témoin clé. Sa déposition de 2016 confirme la présence de Prince Andrew', status:'witness', statusLabel:'Témoin principal' },
+  { icon:'📰', name:'Maria Farmer', role:'Première victime à alerter le FBI en 1996. Ses révélations ignorées pendant 9 ans', status:'witness', statusLabel:'Première plaignante' },
+  { icon:'🏦', name:'JPMorgan Chase', role:'Banque condamnée à payer 290M$ pour avoir maintenu des relations avec Epstein', status:'convicted', statusLabel:'290M$ amende' },
+  { icon:'🏦', name:'Deutsche Bank', role:'Banque condamnée à 75M$ dans l\'affaire Epstein', status:'convicted', statusLabel:'75M$ amende' }
+];
+
+// ===== STATE =====
+let allFetchedArticles = [...realArticles];
+let newArticlesCount = 0;
+let currentFilter = 'all';
+let currentSearchQuery = '';
+
+// ===== RSS SOURCES =====
+const RSS_SOURCES = [
+  { id:'reuters',  name:'Reuters',       url:'https://feeds.reuters.com/reuters/topNews' },
+  { id:'guardian', name:'The Guardian',  url:'https://www.theguardian.com/us-news/epstein/rss' },
+  { id:'bbc',      name:'BBC',           url:'http://feeds.bbci.co.uk/news/world/rss.xml' },
+  { id:'ap',       name:'AP News',       url:'https://feeds.apnews.com/rss/topnews' },
+  { id:'nyt',      name:'NY Times',      url:'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml' },
+  { id:'cnn',      name:'CNN',           url:'http://rss.cnn.com/rss/cnn_topstories.rss' },
+  { id:'pbs',      name:'PBS',           url:'https://www.pbs.org/newshour/feeds/rss/headlines' },
+  { id:'alj',      name:'Al Jazeera',    url:'https://www.aljazeera.com/xml/rss/all.xml' }
+];
+
+// ===== INIT =====
+window.onload = () => {
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+  renderDossierCards();
+  renderTimeline();
+  renderPersons();
+  renderArticleViews();
+  updateLiveFeed(realArticles.filter(a => a.isNew).slice(0, 8));
+  fetchRSSFeeds();
+  setInterval(fetchRSSFeeds, 300000);
+  document.getElementById('navArticleCount').textContent = `(${allFetchedArticles.length})`;
+};
+
+function updateDateTime() {
+  const now = new Date();
+  document.getElementById('currentDateTime').textContent =
+    now.toLocaleDateString('fr-FR', { weekday:'short', day:'2-digit', month:'short', year:'numeric' }) + ' ' +
+    now.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+}
+
+// ===== RENDER DOSSIER CARDS =====
+function renderDossierCards() {
+  // Re-count from allFetchedArticles
+  dossiers.forEach(d => { d.articles = allFetchedArticles.filter(a => a.dossier === d.id); });
+  const total = allFetchedArticles.length;
+  document.getElementById('statArticles').textContent = total;
+  document.getElementById('footerArticleCount').textContent = total;
+  document.getElementById('navArticleCount').textContent = `(${total})`;
+  document.getElementById('totalArticlesCount').textContent = `${total} ARTICLES AU TOTAL`;
+
+  const makeCard = (d, cid) => {
+    const newCount = d.articles.filter(a => a.isNew).length;
+    const div = document.createElement('div');
+    div.className = 'dossier-card';
+    div.id = `dc-${cid}-${d.id}`;
+    div.innerHTML = `
+      <div class="dossier-card-header">
+        <span class="dossier-icon">${d.icon}</span>
+        <div class="dossier-name">${d.name}</div>
+        <div class="dossier-desc">${d.desc}</div>
+      </div>
+      <div class="dossier-card-footer">
+        <span class="dossier-count">${d.articles.length} ARTICLES</span>
+        ${newCount > 0 ? `<span class="dossier-new-badge">${newCount} NOUVEAU${newCount>1?'X':''}</span>` : ''}
+      </div>`;
+    div.onclick = () => openDossier(d.id);
+    return div;
+  };
+
+  ['dossierCardsHome','dossierCardsMain'].forEach(cid => {
+    const el = document.getElementById(cid);
+    if (!el) return;
+    el.innerHTML = '';
+    dossiers.forEach(d => el.appendChild(makeCard(d, cid)));
+  });
+}
+
+function openDossier(dossierId) {
+  switchTab('dossiers', document.querySelectorAll('.nav-item')[1]);
+  const d = dossiers.find(x => x.id === dossierId);
+  if (!d) return;
+  document.querySelectorAll('[id^="dc-dossierCardsMain"]').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById(`dc-dossierCardsMain-${dossierId}`);
+  if (card) card.classList.add('active');
+  const content = document.getElementById('dossierContent');
+  content.innerHTML = `
+    <div style="margin-top:24px;">
+      <div class="section-header">
+        <h2 class="section-title">${d.icon} ${d.name}</h2>
+        <span class="section-count">${d.articles.length} ARTICLES</span>
+      </div>
+      <div class="articles-grid">${d.articles.map(renderArticleCard).join('')}</div>
+    </div>`;
+  setTimeout(() => content.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+}
+
+// ===== RENDER ARTICLE CARD =====
+function renderArticleCard(a) {
+  const dateStr = new Date(a.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+  const d = dossiers.find(x => x.id === a.dossier);
+  return `
+    <div class="article-card ${a.isNew ? 'new-article' : ''}">
+      <div class="article-card-header">
+        <div class="article-card-meta">
+          ${a.isNew ? '<span class="new-indicator">NOUVEAU</span>' : ''}
+          <span class="dossier-tag ${d ? d.color : 'tag-ink'}" style="font-size:8px;padding:2px 5px;">${d ? d.name : 'Général'}</span>
+          <span class="article-date">${dateStr}</span>
+        </div>
+        <div class="article-card-title">${a.title}</div>
+        <div class="article-card-excerpt">${a.excerpt}</div>
+      </div>
+      <div class="article-card-footer">
+        <span class="article-source-name">${a.source}</span>
+        <a href="${a.url}" target="_blank" class="read-btn" style="font-size:8px;padding:4px 10px;">LIRE L'ARTICLE →</a>
+      </div>
+    </div>`;
+}
+
+function renderArticleViews() {
+  // Recent (top 6 newest)
+  const recent = [...allFetchedArticles].sort((a,b) => new Date(b.date)-new Date(a.date)).slice(0,6);
+  document.getElementById('recentArticles').innerHTML = recent.map(renderArticleCard).join('');
+  renderAllArticles();
+  renderDirectFeed();
+  setTimeout(() => {
+    injectFCBanners('recentArticles');
+    injectFCBanners('allArticlesGrid');
+    injectFCBanners('directFeed');
+  }, 50);
+}
+
+function renderAllArticles() {
+  let articles = [...allFetchedArticles];
+  if (currentFilter !== 'all') articles = articles.filter(a => a.dossier === currentFilter);
+  if (currentSearchQuery) {
+    const q = currentSearchQuery.toLowerCase();
+    articles = articles.filter(a =>
+      a.title.toLowerCase().includes(q) ||
+      a.excerpt.toLowerCase().includes(q) ||
+      a.source.toLowerCase().includes(q)
+    );
+  }
+  articles.sort((a,b) => new Date(b.date)-new Date(a.date));
+  document.getElementById('allArticlesCount').textContent = `${articles.length} ARTICLES`;
+  document.getElementById('allArticlesGrid').innerHTML = articles.length > 0
+    ? articles.map(renderArticleCard).join('')
+    : '<div class="empty-state" style="grid-column:1/-1">Aucun article trouvé.</div>';
+}
+
+function renderDirectFeed() {
+  const articles = [...allFetchedArticles].sort((a,b) => new Date(b.date)-new Date(a.date)).slice(0,24);
+  document.getElementById('directFeed').innerHTML = articles.map(renderArticleCard).join('');
+  document.getElementById('directCount').textContent = `${allFetchedArticles.length} ARTICLES — VEILLE ACTIVE`;
+}
+
+function filterArticles(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('#filterBar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAllArticles();
+}
+
+function searchArticles(query) {
+  currentSearchQuery = query;
+  renderAllArticles();
+}
+
+// ===== TIMELINE =====
+function renderTimeline() {
+  document.getElementById('timeline').innerHTML = timelineEvents.map(e => `
+    <div class="timeline-item ${e.milestone ? 'milestone' : ''}">
+      <div class="timeline-date">${e.date}</div>
+      <div class="timeline-title">${e.title}</div>
+      <div class="timeline-desc">${e.desc}</div>
+      <div class="timeline-source">SOURCE : ${e.source}</div>
+    </div>`).join('');
+}
+
+// ===== PERSONS =====
+function renderPersons() {
+  document.getElementById('personsGrid').innerHTML = persons.map(p => `
+    <div class="person-card">
+      <div class="person-avatar">${p.icon}</div>
+      <div class="person-name">${p.name}</div>
+      <div class="person-role">${p.role}</div>
+      <span class="person-status status-${p.status}">${p.statusLabel}</span>
+    </div>`).join('');
+}
+
+// ===== LIVE FEED =====
+function updateLiveFeed(articles) {
+  const feed = document.getElementById('liveFeed');
+  if (!articles || articles.length === 0) {
+    feed.innerHTML = '<div class="feed-item"><div class="feed-item-meta" style="text-align:center;padding:12px;color:var(--text3);">Surveillance active — tous les 5 min</div></div>';
+    return;
+  }
+  feed.innerHTML = articles.slice(0,10).map((a, i) => {
+    const d = dossiers.find(x => x.id === a.dossier);
+    const dateStr = new Date(a.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
+    return `
+      <div class="feed-item ${i < 3 ? 'feed-new' : ''}" onclick="window.open('${a.url}','_blank')">
+        <div class="feed-item-tag" style="color:${i<3?'var(--red)':'var(--text3)'};">${d ? d.name : 'Général'}</div>
+        <div class="feed-item-title">${a.title.substring(0,85)}${a.title.length > 85 ? '...' : ''}</div>
+        <div class="feed-item-meta">${a.source} · ${dateStr}</div>
+      </div>`;
+  }).join('');
+}
+
+// ===== RSS FETCHING =====
+async function fetchRSSFeeds() {
+  const now = new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  document.getElementById('lastFetch').textContent = 'Vérification...';
+  let newArticles = [];
+
+  for (const src of RSS_SOURCES) {
+    setRSSStatus(src.id, 'loading');
+    try {
+      const items = await fetchRSS(src);
+      if (items.length) { setRSSStatus(src.id, 'ok'); newArticles.push(...items); }
+      else setRSSStatus(src.id, 'err');
+    } catch { setRSSStatus(src.id, 'err'); }
+    await sleep(150);
+  }
+
+  const epsteinKw = ['epstein','maxwell','ghislaine','giuffre','sex trafficking','lolita','pedophile island','trafic sexuel'];
+  const filtered = newArticles.filter(a => epsteinKw.some(kw => (a.title+' '+a.excerpt).toLowerCase().includes(kw)));
+  let added = 0;
+  filtered.forEach(a => {
+    const exists = allFetchedArticles.some(x => x.title.toLowerCase().slice(0,50) === a.title.toLowerCase().slice(0,50));
+    if (!exists) {
+      a.dossier = classifyArticle(a);
+      a.isNew = true;
+      allFetchedArticles.unshift(a);
+      added++;
+      newArticlesCount++;
+    }
+  });
+
+  document.getElementById('lastFetch').textContent = `Vérif. ${now}${added > 0 ? ` — ${added} nouveau${added>1?'x':''}` : ' — À jour'}`;
+  document.getElementById('directLastFetch').textContent = `Vérification : ${now}`;
+
+  if (added > 0) {
+    renderDossierCards();
+    renderArticleViews();
+    updateLiveFeed(allFetchedArticles.filter(a => a.isNew).slice(0, 8));
+    updateTicker(filtered.slice(0,3));
+    showToast(`${added} nouvel article${added>1?'s':''}`, filtered[0]?.title || '');
+    updateFloatBtn();
+    addToUpdatePanel(filtered.slice(0, added));
+  } else {
+    updateLiveFeed(allFetchedArticles.filter(a => a.isNew).slice(0, 8));
+  }
+}
+
+async function fetchRSS(src) {
+  const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}&count=20`;
+  try {
+    const r = await fetch(url, { signal: AbortSignal.timeout(7000) });
+    const data = await r.json();
+    if (data.status === 'ok' && data.items) return data.items.map(item => mapItem(item, src.name));
+  } catch {}
+  try {
+    const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(src.url)}`, { signal: AbortSignal.timeout(6000) });
+    return parseXML(await r.text(), src.name);
+  } catch {}
+  return [];
+}
+
+function mapItem(item, srcName) {
+  return { id: Date.now() + Math.random(), title: strip(item.title||''), excerpt: strip(item.description||item.content||'').substring(0,350), source: srcName, date: tryDate(item.pubDate), url: item.link||'#', dossier:'dossier-1', isNew:true };
+}
+
+function parseXML(xml, srcName) {
+  try {
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    return Array.from(doc.querySelectorAll('item')).slice(0,15).map(item => ({
+      id: Date.now() + Math.random(),
+      title: strip(item.querySelector('title')?.textContent||''),
+      excerpt: strip(item.querySelector('description')?.textContent||'').substring(0,350),
+      source: srcName, date: tryDate(item.querySelector('pubDate')?.textContent), url: item.querySelector('link')?.textContent||'#', dossier:'dossier-1', isNew:true
+    }));
+  } catch { return []; }
+}
+
+function strip(h) { return h.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim(); }
+function tryDate(s) { try { return new Date(s||'').toISOString().split('T')[0]; } catch { return new Date().toISOString().split('T')[0]; } }
+function sleep(ms) { return new Promise(r => setTimeout(r,ms)); }
+
+function classifyArticle(a) {
+  const t = (a.title+' '+a.excerpt).toLowerCase();
+  if (/maxwell|ghislaine/.test(t)) return 'dossier-4';
+  if (/document|déclassif|foia|judiciaire|fichier|transparency|files|release/.test(t)) return 'dossier-5';
+  if (/victime|témoign|giuffre|plainte|abusé|survivor|victim/.test(t)) return 'dossier-6';
+  if (/procès|condamn|prison|verdict|jugement|tribunal|acosta|trial/.test(t)) return 'dossier-3';
+  if (/prince|andrew|clinton|trump|réseau|complicité|banque|jpmorgan|network/.test(t)) return 'dossier-2';
+  return 'dossier-1';
+}
+
+function setRSSStatus(id, s) {
+  const el = document.querySelector(`#rss-${id} .rss-dot`);
+  if (el) el.className = 'rss-dot ' + ({ok:'rss-ok',loading:'rss-loading',err:'rss-err'}[s]||'rss-loading');
+}
+
+function updateTicker(articles) {
+  const inner = document.getElementById('tickerInner');
+  articles.forEach(a => {
+    const span = document.createElement('span');
+    span.className = 'ticker-item';
+    span.textContent = a.title.substring(0,100);
+    inner.prepend(span);
+    const clone = span.cloneNode(true);
+    inner.appendChild(clone);
+  });
+}
+
+// ===== TOAST & PANEL =====
+function showToast(title, body) {
+  const c = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<div class="toast-title">⚡ ${title}</div><div class="toast-body">${body.substring(0,80)}...</div><div class="toast-source">Cliquer pour voir le direct</div>`;
+  t.onclick = () => { switchTab('direct', document.querySelectorAll('.nav-item')[5]); c.removeChild(t); };
+  c.appendChild(t);
+  setTimeout(() => { if (c.contains(t)) c.removeChild(t); }, 7000);
+}
+
+function updateFloatBtn() {
+  const btn = document.getElementById('updateFloatBtn');
+  btn.style.display = 'flex';
+  document.getElementById('updateBadge').textContent = newArticlesCount;
+}
+
+function addToUpdatePanel(articles) {
+  const c = document.getElementById('updateItems');
+  c.innerHTML = articles.slice(0,5).map(a => {
+    const d = dossiers.find(x => x.id === a.dossier);
+    return `<div class="update-item"><div class="update-item-tag">${d?d.name:'Général'} · ${a.source}</div><div class="update-item-title">${a.title.substring(0,65)}...</div><div class="update-item-meta">${new Date(a.date).toLocaleDateString('fr-FR',{day:'2-digit',month:'short'})}</div></div>`;
+  }).join('') + c.innerHTML;
+}
+
+function toggleUpdatePanel() {
+  const p = document.getElementById('updatePanel');
+  const isV = p.style.display === 'block';
+  p.style.display = isV ? 'none' : 'block';
+  if (!isV) { newArticlesCount = 0; document.getElementById('updateBadge').textContent = '0'; }
+}
+
+function showAllNew() {
+  switchTab('direct', document.querySelectorAll('.nav-item')[5]);
+  document.getElementById('updatePanel').style.display = 'none';
+}
+
+function forceRefresh() {
+  document.getElementById('directFeed').innerHTML = '<div class="skeleton-card" style="grid-column:1/-1"><div class="loading-skeleton skeleton-title"></div><div class="loading-skeleton skeleton-line"></div></div>';
+  fetchRSSFeeds();
+}
+
+// ===== TAB SWITCH =====
+function switchTab(id, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
+  const tab = document.getElementById('tab-'+id);
+  if (tab) tab.style.display = '';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+document.addEventListener('click', e => {
+  const p = document.getElementById('updatePanel');
+  if (p.style.display === 'block' && !p.contains(e.target) && !e.target.closest('.update-btn-float')) {
+    p.style.display = 'none';
+  }
+});
+
+// ===== FREECASH AD LOGIC =====
+const FC_URL = 'https://freecash.com/r/9MYR8';
+const FC_INLINE_HTML = `
+  <div class="fc-inline-banner" style="grid-column:1/-1;">
+    <div class="fc-inline-info">
+      <div class="fc-inline-tag">Partenaire officiel · Offre limitée</div>
+      <div class="fc-inline-title">Pendant que tu lis, d'autres <span>gagnent de l'argent</span> en ligne</div>
+      <div class="fc-inline-desc">FreeCash te paye pour faire des sondages, jouer à des jeux et compléter des offres.<br>Retrait instantané en PayPal, Bitcoin ou cartes cadeau. Inscription 100% gratuite.</div>
+    </div>
+    <div class="fc-inline-right">
+      <div style="text-align:right">
+        <div class="fc-inline-amount">$250</div>
+        <div class="fc-inline-amount-sub">Bonus de bienvenue</div>
+      </div>
+      <a href="${FC_URL}" target="_blank" class="fc-inline-btn">💰 COMMENCER GRATUITEMENT →</a>
+      <div class="fc-inline-note">Lien partenaire · Sans engagement · Gratuit</div>
+    </div>
+  </div>`;
+
+// Inject inline banner into articles grids after every 6 cards
+function injectFCBanners(gridId) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  // Remove existing banners
+  grid.querySelectorAll('.fc-inline-banner').forEach(b => b.remove());
+  const cards = Array.from(grid.children);
+  if (cards.length >= 6) {
+    const anchor = cards[5];
+    const wrapper = document.createElement('div');
+    wrapper.style.gridColumn = '1/-1';
+    wrapper.innerHTML = FC_INLINE_HTML;
+    grid.insertBefore(wrapper.firstElementChild, anchor.nextSibling);
+  }
+  if (cards.length >= 14) {
+    const anchor2 = cards[13];
+    const wrapper2 = document.createElement('div');
+    wrapper2.style.gridColumn = '1/-1';
+    wrapper2.innerHTML = FC_INLINE_HTML;
+    grid.insertBefore(wrapper2.firstElementChild, anchor2.nextSibling);
+  }
+}
+
+function closeStickyBar() {
+  const bar = document.getElementById('fcStickyBar');
+  if (bar) bar.style.display = 'none';
+  // Show popup a bit after closing bar
+  setTimeout(showPopup, 8000);
+}
+
+function showPopup() {
+  const p = document.getElementById('fcPopup');
+  if (p) p.style.display = 'block';
+}
+
+function closePopup() {
+  const p = document.getElementById('fcPopup');
+  if (p) p.style.display = 'none';
+}
+
+// Auto-show popup after 25 seconds if sticky bar still visible
+setTimeout(() => {
+  const bar = document.getElementById('fcStickyBar');
+  if (bar && bar.style.display !== 'none') showPopup();
+}, 25000);
+
+// Inject banners after grids are rendered
+setTimeout(() => {
+  injectFCBanners('recentArticles');
+  injectFCBanners('allArticlesGrid');
+  injectFCBanners('directFeed');
+}, 500);
+</script>
+
+</body>
+</html>
